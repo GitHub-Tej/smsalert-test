@@ -1,16 +1,17 @@
-name: Greeting from Mona
+name: Node.js Package
 
-on: push
-
+on: [push]
 jobs:
-  my-job:
-    name: My Job
+  send-sms:
+    name: Send SMS
     runs-on: ubuntu-latest
     steps:
-    - name: Print a greeting
+    - name: 'Sending SMS Notification'
+      uses: cozyvision/smsalert@master
+      with:
+        senderid: ${{ secrets.senderid }}
+        toPhoneNumber: ${{ secrets.MY_PHONE_NUMBER }}
+        message: ${{secrets.message}}
       env:
-   
-        FIRST_NAME: Mona
-
-      run: |
-        echo $FIRST_NAME.
+        SMSALERT_USERNAME: ${{ secrets.SMSALERT_USERNAME }}
+        SMSALERT_PASSWORD: ${{ secrets.SMSALERT_PASSWORD }}

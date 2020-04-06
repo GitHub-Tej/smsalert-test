@@ -1,9 +1,8 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
-
+ check_suite:
+    types: [rerequested, completed]
 jobs:
   send-sms:
     name: Send SMS
@@ -14,7 +13,7 @@ jobs:
       with:
         senderid: ${{ secrets.senderid }}
         toPhoneNumber: ${{ secrets.MY_PHONE_NUMBER }}
-        message: 'Hello from github'
+        message: ${{secrets.message}}
       env:
         SMSALERT_USERNAME: ${{ secrets.SMSALERT_USERNAME }}
         SMSALERT_PASSWORD: ${{ secrets.SMSALERT_PASSWORD }}
